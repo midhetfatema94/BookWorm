@@ -37,6 +37,9 @@ struct DetailView: View {
                     .font(.title)
                     .foregroundColor(.secondary)
                 
+                Text("Completed at: \(formatted(date: self.book.date ?? Date()))")
+                    .fontWeight(.medium)
+                
                 Text(self.book.review ?? "No reviews yet")
                     .padding()
                 
@@ -64,6 +67,12 @@ struct DetailView: View {
         moc.delete(book)
         try? self.moc.save()
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func formatted(date from: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: from)
     }
 }
 
